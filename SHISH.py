@@ -47,13 +47,20 @@ def shi(bit=125,rand=5):
 
 def code():
 	slo = text1.get(1.0, 'end-1c')
-	with open('key.json','r',encoding='utf-8') as json_j:
-		red = json.load(json_j)
-		v = []
-		for x in slo:
-			if x in red:
-				v.append(random.choice(red[x]))
 
+	try:
+		with open('key.json','r',encoding='utf-8') as json_j:
+			red = json.load(json_j)
+			v = []
+			for x in slo:
+				if x in red:
+					v.append(random.choice(red[x]))
+	except FileNotFoundError:
+		text2.delete(1.0, tkinter.END)
+		text2.insert(tkinter.INSERT,"NO FILE")
+		text1.delete(1.0, tkinter.END)
+		text1.insert(tkinter.INSERT,"NO FILE")
+		return
 
 
 	text2.delete(1.0, tkinter.END)
@@ -100,29 +107,30 @@ def copy1():
 
 
 root1=tkinter.Tk()
-root1.geometry('384x666')
+root1.geometry('666x365')
 
 
 
-bat1 = tkinter.Button(root1, width=10,text='Создать ключ',  command = shi,bg='#fffef0')
+bat1 = tkinter.Button(root1, width=5,text='Создать ключ',  command = shi,bg='#fffef0')
 frame0 = tkinter.Frame(root1)
 text0_1 = tkinter.Text(frame0,width=5, height=1,bg='#ffffff')
 text0_2 = tkinter.Text(frame0,width=5, height=1,bg='#ffffff')
 
-bat2 = tkinter.Button(root1, width=20,text='Закодирывать',command = code,bg='#fffef0')
-text1 = tkinter.scrolledtext.ScrolledText(root1,width=35, height=1)
 
-frame1 = tkinter.Frame(root1)
-bat2_1 = tkinter.Button(frame1, width=20,text='COPY',command = copy0,bg='#fade55')
-bat2_2 = tkinter.Button(frame1, width=20,text='PAST',command = paste0,bg='#c3f229')
+frame2_1 = tkinter.Frame(root1)
+bat2 = tkinter.Button(frame2_1, width=5,height=5,text='Закодирывать',command = code,bg='#fffef0')
+text1 = tkinter.scrolledtext.ScrolledText(frame2_1,width=10, height=1)
+frame1 = tkinter.Frame(frame2_1)
+bat2_1 = tkinter.Button(frame1, width=5,text='COPY',command = copy0,bg='#fade55')
+bat2_2 = tkinter.Button(frame1, width=5,text='PAST',command = paste0,bg='#c3f229')
 
 
-bat3 = tkinter.Button(root1, width=20,text='Декодиорывать',command = incode,bg='#fffef0')
-text2 = tkinter.scrolledtext.ScrolledText(root1,width=35, height=1)
-
-frame2 = tkinter.Frame(root1)
-bat3_1 = tkinter.Button(frame2, width=20,text='COPY',command = copy1,bg='#fade55')
-bat3_2 = tkinter.Button(frame2, width=20,text='PAST',command = paste1,bg='#c3f229')
+frame3_1 = tkinter.Frame(root1)
+bat3 = tkinter.Button(frame3_1, width=5,height=5,text='Декодиорывать',command = incode,bg='#fffef0')
+text2 = tkinter.scrolledtext.ScrolledText(frame3_1,width=10, height=1)
+frame2 = tkinter.Frame(frame3_1)
+bat3_1 = tkinter.Button(frame2, width=5,text='COPY',command = copy1,bg='#fade55')
+bat3_2 = tkinter.Button(frame2, width=5,text='PAST',command = paste1,bg='#c3f229')
 
 #_________________________________________________________________#
 bat1.pack(fill=tkinter.BOTH)
@@ -131,17 +139,21 @@ text0_1.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 text0_2.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 
 
-bat2.pack(fill=tkinter.BOTH,expand=True)
+
+frame2_1.pack(side='left',fill=tkinter.BOTH,expand=True)
+bat2.pack(fill=tkinter.BOTH)
+text1.pack(fill=tkinter.BOTH,expand=True)
 frame1.pack(fill=tkinter.BOTH)
 bat2_1.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 bat2_2.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
-text1.pack(fill=tkinter.BOTH,expand=True)
 
 
-bat3.pack(fill=tkinter.BOTH,expand=True)
+frame3_1.pack(side='left',fill=tkinter.BOTH,expand=True)
+bat3.pack(fill=tkinter.BOTH)
+text2.pack(fill=tkinter.BOTH,expand=True)
 frame2.pack(fill=tkinter.BOTH)
 bat3_1.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 bat3_2.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 
-text2.pack(fill=tkinter.BOTH,expand=True)
+
 root1.mainloop()
