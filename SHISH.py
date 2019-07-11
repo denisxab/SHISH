@@ -26,7 +26,9 @@ def shi(bit=125,rand=5):
 	  'Н', 'О', 'П', 'Р', 'С', 'Т' ,'У', 'Ф', 'Х', 'Ц',
 	  'Ч', 'Ш', 'Щ', 'Ъ', 'Ы','Ь', 'Э', 'Ю', 'Я',
 	  ' ','1','2','3','4','5','6','7','8','9','0',
-	  '&','?','\\','@','!','a','b','c','d','e','f',
+	  '&','?','\\','@','!',':','/','//','.',',',"'",'"',
+	  'a','b','c','d','e','f','\n','\t','(',')','-','+',
+	  '=','_','–',
 	  'g','h','i','j','k','l','m','n','o','p','q','r',
 	  's','t','u','v','w','x','y','z','A','B','C','D',
 	  'E','F','G','H','I','J','K','L','M','N','O','P','Q',
@@ -43,6 +45,9 @@ def shi(bit=125,rand=5):
 	with open('key.json','w',encoding='utf-8') as file_j:
 		json.dump(l,file_j,sort_keys=False,ensure_ascii=False)
 
+
+
+	chek_d()
 	return l
 
 def code():
@@ -107,13 +112,33 @@ def clear():
 	text1.delete(1.0, tkinter.END)
 	text2.delete(1.0, tkinter.END)
 
+def chek_d():
+	if not 'key.json' in os.listdir():
+		frame4.pack_forget()
+		bat_clear.pack_forget()
+		root1.geometry('666x380')
+		bat1['height']=10
+		text0_1['height']=5
+		text0_2['height']=5
+
+	if 'key.json' in os.listdir():
+		bat1.pack_forget()
+		frame0.pack_forget()
+		text0_1.pack_forget()
+		text0_2.pack_forget()
+		frame4.pack(fill=tkinter.BOTH,expand=True)
+		bat_clear.pack(fill=tkinter.BOTH)
 
 root1=tkinter.Tk()
 root1.geometry('666x380')
 
+try:
+	root1.iconbitmap('96.ico')
+except:
+	root1.iconbitmap()
 
 
-bat1 = tkinter.Button(root1, width=5,text='Создать ключ',  command = shi,bg='#fffef0')
+bat1 = tkinter.Button(root1, width=5,text='Создать ключ',  command = shi,fg='#ffffff',bg='#4b5463')
 frame0 = tkinter.Frame(root1)
 text0_1 = tkinter.Text(frame0,width=5, height=1,bg='#ffffff')
 text0_2 = tkinter.Text(frame0,width=5, height=1,bg='#ffffff')
@@ -122,21 +147,21 @@ text0_2 = tkinter.Text(frame0,width=5, height=1,bg='#ffffff')
 
 frame4 = tkinter.Frame(root1)
 frame2_1 = tkinter.Frame(frame4)
-bat2 = tkinter.Button(frame2_1, width=5,height=5,text='Закодировать',command = code,bg='#fffef0')
-text1 = tkinter.scrolledtext.ScrolledText(frame2_1,width=10, height=10)
+bat2 = tkinter.Button(frame2_1, width=5,height=5,text='Закодировать',command = code,fg='#ffffff',bg='#4b5463')
+text1 = tkinter.scrolledtext.ScrolledText(frame2_1,width=10, height=11)
 frame1 = tkinter.Frame(frame2_1)
 bat2_1 = tkinter.Button(frame1, width=5,text='COPY',command = copy0,bg='#fade55')
 bat2_2 = tkinter.Button(frame1, width=5,text='PAST',command = paste0,bg='#c3f229')
 
 
 frame3_1 = tkinter.Frame(frame4)
-bat3 = tkinter.Button(frame3_1, width=5,height=5,text='Декодировать',command = incode,bg='#fffef0')
-text2 = tkinter.scrolledtext.ScrolledText(frame3_1,width=10, height=10)
+bat3 = tkinter.Button(frame3_1, width=5,height=5,text='Декодировать',command = incode,fg='#ffffff',bg='#4b5463')
+text2 = tkinter.scrolledtext.ScrolledText(frame3_1,width=10, height=11)
 frame2 = tkinter.Frame(frame3_1)
 bat3_1 = tkinter.Button(frame2, width=5,text='COPY',command = copy1,bg='#fade55')
 bat3_2 = tkinter.Button(frame2, width=5,text='PAST',command = paste1,bg='#c3f229')
 
-bat_clear = tkinter.Button(root1, width=5,height=5,text='X_X',command = clear,bg='#c3f229')
+bat_clear = tkinter.Button(root1, width=5,height=3,text='X_X',command = clear,fg='#ffffff',bg='#4b5463')
 
 
 #_________________________________________________________________#
@@ -151,18 +176,20 @@ frame2_1.pack(side='left',fill=tkinter.BOTH,expand=True)
 bat2.pack(fill=tkinter.BOTH)
 text1.pack(fill=tkinter.BOTH,expand=True)
 frame1.pack(fill=tkinter.BOTH)
-bat2_1.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
-bat2_2.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
+bat2_1.pack(side='left',fill=tkinter.BOTH,expand=True,)
+bat2_2.pack(side='left',fill=tkinter.BOTH,expand=True,)
 
 
 frame3_1.pack(side='left',fill=tkinter.BOTH,expand=True)
 bat3.pack(fill=tkinter.BOTH)
 text2.pack(fill=tkinter.BOTH,expand=True)
 frame2.pack(fill=tkinter.BOTH)
-bat3_1.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
-bat3_2.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
+bat3_1.pack(side='left',fill=tkinter.BOTH,expand=True,)
+bat3_2.pack(side='left',fill=tkinter.BOTH,expand=True,)
 
 
 bat_clear.pack(fill=tkinter.BOTH)
 
+
+chek_d()
 root1.mainloop()
