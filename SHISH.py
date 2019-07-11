@@ -75,17 +75,28 @@ def code():
 		text1.insert(tkinter.INSERT,"NO FILE")
 		return
 
+	f = ''
+	for x in v:
+		f+='{}-'.format(x)
+
+
 
 	text2.delete(1.0, tkinter.END)
-	text2.insert(tkinter.INSERT,str(v))
+	text2.insert(tkinter.INSERT,f)
 	return v
 
 def incode():
 	try:
-		list_code = eval( text2.get(1.0, 'end-1c'))
+		list_code = []
+		g = text2.get(1.0, 'end-1c').split('-')
+		for x in g:
+			try:
+				list_code.append(int(x))
+			except ValueError:
+				continue
+
 	except SyntaxError:
 		return
-
 
 	with open('key.json','r',encoding='utf-8') as json_j:
 		red = json.load(json_j)
@@ -94,6 +105,7 @@ def incode():
 			for z in list_code:
 				if z in x[1]:
 					v[z]=x[0]
+
 
 	zx = []
 	for x in  list_code:
