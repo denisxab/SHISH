@@ -103,10 +103,13 @@ def paste1():
 def copy1():
 	pyperclip.copy(text2.get(1.0, 'end-1c'))
 
+def clear():
+	text1.delete(1.0, tkinter.END)
+	text2.delete(1.0, tkinter.END)
 
 
 root1=tkinter.Tk()
-root1.geometry('666x365')
+root1.geometry('666x380')
 
 
 
@@ -116,20 +119,25 @@ text0_1 = tkinter.Text(frame0,width=5, height=1,bg='#ffffff')
 text0_2 = tkinter.Text(frame0,width=5, height=1,bg='#ffffff')
 
 
-frame2_1 = tkinter.Frame(root1)
+
+frame4 = tkinter.Frame(root1)
+frame2_1 = tkinter.Frame(frame4)
 bat2 = tkinter.Button(frame2_1, width=5,height=5,text='Закодировать',command = code,bg='#fffef0')
-text1 = tkinter.scrolledtext.ScrolledText(frame2_1,width=10, height=1)
+text1 = tkinter.scrolledtext.ScrolledText(frame2_1,width=10, height=10)
 frame1 = tkinter.Frame(frame2_1)
 bat2_1 = tkinter.Button(frame1, width=5,text='COPY',command = copy0,bg='#fade55')
 bat2_2 = tkinter.Button(frame1, width=5,text='PAST',command = paste0,bg='#c3f229')
 
 
-frame3_1 = tkinter.Frame(root1)
+frame3_1 = tkinter.Frame(frame4)
 bat3 = tkinter.Button(frame3_1, width=5,height=5,text='Декодировать',command = incode,bg='#fffef0')
-text2 = tkinter.scrolledtext.ScrolledText(frame3_1,width=10, height=1)
+text2 = tkinter.scrolledtext.ScrolledText(frame3_1,width=10, height=10)
 frame2 = tkinter.Frame(frame3_1)
 bat3_1 = tkinter.Button(frame2, width=5,text='COPY',command = copy1,bg='#fade55')
 bat3_2 = tkinter.Button(frame2, width=5,text='PAST',command = paste1,bg='#c3f229')
+
+bat_clear = tkinter.Button(root1, width=5,height=5,text='X_X',command = clear,bg='#c3f229')
+
 
 #_________________________________________________________________#
 bat1.pack(fill=tkinter.BOTH)
@@ -138,7 +146,7 @@ text0_1.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 text0_2.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 
 
-
+frame4.pack(fill=tkinter.BOTH,expand=True)
 frame2_1.pack(side='left',fill=tkinter.BOTH,expand=True)
 bat2.pack(fill=tkinter.BOTH)
 text1.pack(fill=tkinter.BOTH,expand=True)
@@ -154,5 +162,7 @@ frame2.pack(fill=tkinter.BOTH)
 bat3_1.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 bat3_2.pack(side='left',fill=tkinter.BOTH,expand=True,padx=5, pady=5)
 
+
+bat_clear.pack(fill=tkinter.BOTH)
 
 root1.mainloop()
