@@ -7,16 +7,26 @@ import pyperclip
 
 
 
+def tesa(a):
+	global slovo
+	slovo = ''
+	for x in a:
+		slovo+=x
+	codese(False)
 
 
-def shi(bit=125,rand=5):
+def shi(bit=125,rand=5,GGG = True):
 
-	try :
-		bit = int(text0_1.get(1.0, 'end-1c'))
-		rand = int(text0_2.get(1.0, 'end-1c'))
-	except ValueError:
-		bit = 125
-		rand  = 5
+
+	if GGG:
+		try :
+			bit = int(text0_1.get(1.0, 'end-1c'))
+			rand = int(text0_2.get(1.0, 'end-1c'))
+		except ValueError:
+			bit = 125
+			rand  = 5
+
+
 
 	a =[
 
@@ -53,13 +63,19 @@ def shi(bit=125,rand=5):
 	with open('key.json','w',encoding='utf-8') as file_j:
 		json.dump(l,file_j,sort_keys=False,ensure_ascii=False)
 
-
-
+	tesa(a)
 	chek_d()
 	return l
 
-def code():
-	slo = text1.get(1.0, 'end-1c')
+def codese(GGG = True):
+
+	if GGG:
+		slo = text1.get(1.0, 'end-1c')
+
+	if not GGG:
+		global slovo
+		slo = slovo
+
 
 	try:
 		with open('key.json','r',encoding='utf-8') as json_j:
@@ -80,15 +96,33 @@ def code():
 		f+='{}-'.format(x)
 
 
+	if GGG:
+		text2.delete(1.0, tkinter.END)
+		text2.insert(tkinter.INSERT,f)
 
-	text2.delete(1.0, tkinter.END)
-	text2.insert(tkinter.INSERT,f)
-	return v
+	if not GGG:
+		global code
+		code = f
+		incode(False)
 
-def incode():
+
+	return f
+
+def incode(GGG = True):
+
 	try:
 		list_code = []
-		g = text2.get(1.0, 'end-1c').split('-')
+
+		if GGG:
+			g = text2.get(1.0, 'end-1c').split('-')
+
+		if not GGG:
+			global code
+			g = code.split('-')
+
+	
+
+
 		for x in g:
 			try:
 				list_code.append(int(x))
@@ -97,6 +131,8 @@ def incode():
 
 	except SyntaxError:
 		return
+
+
 
 	with open('key.json','r',encoding='utf-8') as json_j:
 		red = json.load(json_j)
@@ -112,9 +148,31 @@ def incode():
 		if x in v:
 			zx.append(v[x])
 
-	text1.delete(1.0, tkinter.END)
-	text1.insert(tkinter.INSERT,str(''.join(zx)))
+	if GGG:
+		text1.delete(1.0, tkinter.END)
+		text1.insert(tkinter.INSERT,str(''.join(zx)))
+
+	if not GGG:
+		
+		global slovo
+		print(code)
+		# print(slovo)
+		# print('===========')
+		# print(''.join(zx))
+
+		if slovo == ''.join(zx):
+			print('True')
+
+
+		else:
+			print('False')
+			code = ''
+			global FFF
+			FFF += 5
+			shi(FFF,FFF//2,False)
+
 	return zx
+
 
 def paste0():
 	text1.insert(tkinter.INSERT,str(pyperclip.paste()))
@@ -149,6 +207,13 @@ def chek_d():
 		frame4.pack(fill=tkinter.BOTH,expand=True)
 		bat_clear.pack(fill=tkinter.BOTH)
 
+
+slovo = ''
+code = ''
+GGG  = True
+FFF  = 5
+
+
 root1=tkinter.Tk()
 root1.geometry('666x380')
 
@@ -167,7 +232,7 @@ text0_2 = tkinter.Text(frame0,width=5, height=1,bg='#ffffff')
 
 frame4 = tkinter.Frame(root1)
 frame2_1 = tkinter.Frame(frame4)
-bat2 = tkinter.Button(frame2_1, width=5,height=5,text='Закодировать',command = code,fg='#ffffff',bg='#4b5463')
+bat2 = tkinter.Button(frame2_1, width=5,height=5,text='Закодировать',command = codese,fg='#ffffff',bg='#4b5463')
 text1 = tkinter.scrolledtext.ScrolledText(frame2_1,width=10, height=11)
 frame1 = tkinter.Frame(frame2_1)
 bat2_1 = tkinter.Button(frame1, width=5,text='COPY',command = copy0,bg='#fade55')
