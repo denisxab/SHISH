@@ -14,7 +14,6 @@ def tesa(a):
 		slovo+=x
 	codese(False)
 
-
 def shi(bit=125,rand=5,GGG = True):
 
 
@@ -121,8 +120,6 @@ def incode(GGG = True):
 			g = code.split('-')
 
 	
-
-
 		for x in g:
 			try:
 				list_code.append(int(x))
@@ -155,24 +152,17 @@ def incode(GGG = True):
 	if not GGG:
 		
 		global slovo
-		print(code)
+		# print(code)
 		# print(slovo)
-		# print('===========')
 		# print(''.join(zx))
 
-		if slovo == ''.join(zx):
-			print('True')
-
-
-		else:
-			print('False')
-			code = ''
+		if slovo != ''.join(zx):
 			global FFF
 			FFF += 5
+			code = ''
 			shi(FFF,FFF//2,False)
 
 	return zx
-
 
 def paste0():
 	text1.insert(tkinter.INSERT,str(pyperclip.paste()))
